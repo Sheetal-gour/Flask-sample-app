@@ -21,11 +21,7 @@ spec:
             cpu: "1"
         ports:
         - containerPort: 4000
-<<<<<<< HEAD
 
-=======
-        
->>>>>>> e132da5cc6135b8e30dfce6fb2ec5f7c7d3fde13
         # startup probe 
         startupProbe:
           httpGet:
@@ -51,10 +47,7 @@ spec:
             port: 4000
           initialDelaySeconds: 5
           periodSeconds: 5
-<<<<<<< HEAD
           failureThreshold: 1
         
           
-=======
-          failureThreshold: 1
->>>>>>> e132da5cc6135b8e30dfce6fb2ec5f7c7d3fde13
+
