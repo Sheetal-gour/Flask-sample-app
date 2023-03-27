@@ -1,0 +1,52 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: myapp
+spec:
+  selector:
+    matchLabels:
+      app: myapp
+  template:
+    metadata:
+      labels:
+        app: myapp
+    spec:
+      containers:
+      - name: myapp
+        
+        image: sheetal0408/flask-eks-demo
+        resources:
+          limits:
+            memory: "128M"
+            cpu: "1"
+        ports:
+        - containerPort: 4000
+
+        # startup probe 
+        startupProbe:
+          httpGet:
+            path: /
+            port: 4000
+          failureThreshold: 30
+          initialDelaySeconds: 10
+          periodSeconds: 2
+
+        # liveness probe 
+        livenessProbe:
+          exec:
+            command:
+              - "cat"
+              - "requirements.txt"
+          initialDelaySeconds: 15
+          periodSeconds: 5
+          failureThreshold: 1
+
+        # readiness probe 
+        readinessProbe:
+          tcpSocket:
+            port: 4000
+          initialDelaySeconds: 5
+          periodSeconds: 5
+          failureThreshold: 1
+        
+          
